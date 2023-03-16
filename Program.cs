@@ -118,7 +118,7 @@ app.MapPost("/addTodo", async (Item todo, ToDoDbContext db) =>
     await db.SaveChangesAsync();
 
     return Results.Created($"/todoitems/{todo.Id}", todo);
-});
+}).RequireAuthorization();
 app.MapPut("/updateTodo/{id}", async (int id, [FromQuery] string isComplete, ToDoDbContext db) =>
 {
     var todo = await db.Items.FindAsync(id);
@@ -131,7 +131,7 @@ app.MapPut("/updateTodo/{id}", async (int id, [FromQuery] string isComplete, ToD
     await db.SaveChangesAsync();
 
     return Results.Created($"/todoitems/{todo.Id}", todo);
-});
+}).RequireAuthorization();
 app.MapDelete("/deleteTodo/{id}", async (int id, ToDoDbContext db) =>
 {
     if (await db.Items.FindAsync(id) is Item todo)
@@ -142,7 +142,7 @@ app.MapDelete("/deleteTodo/{id}", async (int id, ToDoDbContext db) =>
     }
 
     return Results.NotFound();
-});
+}).RequireAuthorization();
 app.MapPost("/login", async ([FromQuery] string name,[FromQuery] string password, ToDoDbContext db, IHttpContextAccessor httpContextAccessor) =>
 {
     var user = db.Users?.FirstOrDefault(u => u.Name == name && u.Password == password);
