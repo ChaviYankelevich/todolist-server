@@ -88,6 +88,10 @@ builder.Services.AddDistributedMemoryCache();
 
 
 builder.Services.AddHttpContextAccessor();
+builder.Services.AddSwaggerGen(c =>
+{
+    c.SwaggerDoc("v1", new OpenApiInfo { Title = "My API", Version = "v1" });
+});
 
 var app = builder.Build();
 

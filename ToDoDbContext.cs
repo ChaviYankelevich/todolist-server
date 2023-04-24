@@ -14,7 +14,7 @@ public partial class ToDoDbContext : DbContext
         : base(options)
     {
     }
-
+// "tododb":"server=localhost;user=root;password=1234;database=tododb"
     public virtual DbSet<Item> Items { get; set; }
 
     public virtual DbSet<User> Users { get; set; }
