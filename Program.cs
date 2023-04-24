@@ -116,14 +116,16 @@ app.UseCors("CorsPolicy");
 app.UseSession();
 app.MapGet("/getTodos", async (ToDoDbContext db) =>
     await db.Items.ToListAsync()
-).RequireAuthorization();
+);
+// .RequireAuthorization();
 app.MapPost("/addTodo", async (Item todo, ToDoDbContext db) =>
 {
     db.Items.Add(todo);
     await db.SaveChangesAsync();
 
     return Results.Created($"/todoitems/{todo.Id}", todo);
-}).RequireAuthorization();
+});
+// .RequireAuthorization();
 app.MapPut("/updateTodo/{id}", async (int id, [FromQuery] string isComplete, ToDoDbContext db) =>
 {
     var todo = await db.Items.FindAsync(id);
@@ -136,7 +138,8 @@ app.MapPut("/updateTodo/{id}", async (int id, [FromQuery] string isComplete, ToD
     await db.SaveChangesAsync();
 
     return Results.Created($"/todoitems/{todo.Id}", todo);
-}).RequireAuthorization();
+});
+// .RequireAuthorization();
 app.MapDelete("/deleteTodo/{id}", async (int id, ToDoDbContext db) =>
 {
     if (await db.Items.FindAsync(id) is Item todo)
@@ -147,7 +150,8 @@ app.MapDelete("/deleteTodo/{id}", async (int id, ToDoDbContext db) =>
     }
 
     return Results.NotFound();
-}).RequireAuthorization();
+});
+// .RequireAuthorization();
 app.MapPost("/login", async ([FromQuery] string name,[FromQuery] string password, ToDoDbContext db, IHttpContextAccessor httpContextAccessor) =>
 {
     var user = db.Users?.FirstOrDefault(u => u.Name == name && u.Password == password);
