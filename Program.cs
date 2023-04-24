@@ -101,6 +101,7 @@ app.UseAuthorization(); // Add these two lines
 
 // if (app.Environment.IsDevelopment())
 {
+    app.UseDeveloperExceptionPage();
     app.UseSwagger();
     app.UseSwaggerUI();
 }
