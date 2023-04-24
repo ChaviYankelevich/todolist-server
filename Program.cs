@@ -57,7 +57,7 @@ builder.Services.AddSwaggerGen(options =>
             new List<string>()
         }
     });
-    options.OperationFilter<RemoveAuthorizationHeaderParameterFilter>();
+    // options.OperationFilter<RemoveAuthorizationHeaderParameterFilter>();
 }
 );
 
