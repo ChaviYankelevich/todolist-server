@@ -98,7 +98,7 @@ var app = builder.Build();
 
 // Configure authentication and authorization middleware
 app.UseAuthentication();
-// app.UseAuthorization(); // Add these two lines
+app.UseAuthorization(); // Add these two lines
 
 if (app.Environment.IsDevelopment())
 {
