@@ -99,7 +99,7 @@ var app = builder.Build();
 app.UseAuthentication();
 app.UseAuthorization(); // Add these two lines
 
-if (app.Environment.IsDevelopment())
+// if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
     app.UseSwaggerUI();
